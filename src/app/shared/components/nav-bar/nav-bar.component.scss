@@ -1,0 +1,26 @@
+.navbar {
+  background-color: #fdfdfd;
+  padding: 15px;
+  color: #2d3c69;
+  text-align: center;
+}
+
+.navbar-logo a {
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    margin: 5px 0;
+  }
+
+  .content {
+    padding: 10px;
+  }
+}
