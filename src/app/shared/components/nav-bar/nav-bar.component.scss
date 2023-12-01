@@ -1,14 +1,14 @@
 .navbar {
   background-color: #fdfdfd;
-  padding: 15px;
   color: #2d3c69;
   text-align: center;
 }
 
-.navbar-logo a {
-  color: white;
-  text-decoration: none;
+.navbar-logo img {
+  width: 160px;
+  height: auto;
 }
+
 
 @media screen and (max-width: 600px) {
   .navbar {
@@ -16,11 +16,7 @@
     align-items: flex-start;
   }
 
-  .navbar a {
-    margin: 5px 0;
-  }
-
-  .content {
-    padding: 10px;
+  .navbar-logo img {
+    width: 100px;
   }
 }
