@@ -1,7 +1,7 @@
 <div class="content">
   <div class="card">
     <div class="card-header center-text">
-      <h1 class="title"> Formulario de Registro </h1>
+      <h1 class="title"> {{productId ? 'Editar' : '' }} Formulario de Registro </h1>
     </div>
     <div class="card-body">
       <hr>
@@ -123,7 +123,7 @@
     </div>
 
     <div class="card-footer d-flex justify-content-center">
-      <button type="button" class="secondary-button mr-3" (click)="resetForm()">Reset</button>
+      <button type="button" class="secondary-button mr-3" (click)="resetForm()" *ngIf="!productId">Reset</button>
       <button type="submit" form="employeeForm" class="main-button" [disabled]="productForm.invalid" >Enviar</button>
     </div>
   </div>

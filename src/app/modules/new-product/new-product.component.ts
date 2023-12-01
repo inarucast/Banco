@@ -10,8 +10,7 @@ import {
 } from '@angular/forms';
 import {CommonModule, DatePipe} from "@angular/common";
 import {BancoService} from "../../core/https/banco.service";
-import {RouterLink} from "@angular/router";
-import {FinancialProducts} from "../../shared/models/productos-financieros";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-new-product',
@@ -23,7 +22,8 @@ import {FinancialProducts} from "../../shared/models/productos-financieros";
 })
 export class NewProductComponent {
 
-
+  route = inject(ActivatedRoute);
+  productId = this.route.snapshot.paramMap.get('id');
   bancoService = inject(BancoService);
   datePipe = inject(DatePipe);
   productForm!: FormGroup;
