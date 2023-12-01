@@ -10,9 +10,9 @@ export class BancoService {
   private httpClient: HttpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
 
-  public getAllProducts(search: string): Observable<FinancialProducts[]> {
+  public getAllProducts(id: string): Observable<FinancialProducts[]> {
     return this.httpClient.get<FinancialProducts[]>(`${this.baseUrl}`, {
-      params: search ? {search} : {}, responseType: 'json'
+      params: id ? {id} : {}, responseType: 'json'
     });
   }
 

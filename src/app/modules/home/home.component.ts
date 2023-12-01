@@ -16,7 +16,7 @@ import {RouterLink} from "@angular/router";
     NgOptimizedImage
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
 
@@ -47,6 +47,10 @@ export class HomeComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  deleteProduct(productId: string): void {
+
   }
 
   isValidUrl(url: string): string {

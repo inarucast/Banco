@@ -1,51 +1,64 @@
 <div class="content">
   <div class="card">
-    <div class="card-header">
-      <div class="search-container">
+    <div class="header">
+      <div class="d-flex justify-content-space-between">
         <input type="text" #filterInput class="banco-input" [formControl]="search" placeholder="Search...">
       </div>
       <button type="button" class="main-button" routerLink="/add-product">Add New</button>
     </div>
-    <div class="card-body">
-      <table class="data-table">
-        <thead>
-        <tr>
-          <th class="center-text">Logo</th>
-          <th>ID</th>
-          <th>Nombre del producto</th>
-          <th>Descripción</th>
-          <th>Fecha de liberación</th>
-          <th>Fecha de reestructuración</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let product of products">
-          <td class="center-text">
-            <img class="circle-logo" [src]="isValidUrl(product.logo)" alt="picture" />
-          </td>
-          <td>{{product.id}}</td>
-          <td>{{product.name}}</td>
-          <td>{{product.description}}</td>
-          <td>{{product.date_release | date: 'dd/MM/yyyy'}}</td>
-          <td>{{product.date_revision | date: 'dd/MM/yyyy'}}</td>
-          <td>
 
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card-footer justify-content-space-between">
+    <table class="data-table">
+      <thead>
+      <tr>
+        <th class="d-flex justify-content-center">Logo</th>
+        <th>ID</th>
+        <th>Nombre del producto</th>
+        <th>Descripción</th>
+        <th>Fecha de liberación</th>
+        <th>Fecha de reestructuración</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of products">
+        <td class="center-text">
+          <img class="circle-logo" [src]="isValidUrl(product.logo)" alt="picture"/>
+        </td>
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.date_release | date: 'dd/MM/yyyy'}}</td>
+        <td>{{product.date_revision | date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <button [routerLink]="'/add-product/'+product.id">Edit</button>
+          <button (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="footer justify-content-space-between">
       <div class="results">
         <span>{{products.length}} {{products.length > 1 ? 'Resultados' : 'Resultado'}}</span>
       </div>
-      <div>
-        <select class="banco-input">
-          <option>5</option>
-          <option>10</option>
-          <option>20</option>
-        </select>
+      <div class="d-flex align-items-center">
+        <div class="mr-3">
+          <select class="custom-box">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+          </select>
+        </div>
+        <div class="custom-box">
+          <a href="#">&laquo;</a>
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">6</a>
+          <a href="#">&raquo;</a>
+        </div>
       </div>
     </div>
   </div>
