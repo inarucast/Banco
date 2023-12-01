@@ -3,14 +3,17 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 import {debounceTime, fromEvent, merge, startWith, Subject, switchMap} from "rxjs";
 import {FinancialProducts} from "../../shared/models/productos-financieros";
 import {BancoService} from "../../core/https/banco.service";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -40,15 +43,15 @@ export class HomeComponent {
         this.products = res;
         this.isLoading = false;
       },
-      error: err => {
+      error: () => {
         this.isLoading = false;
       }
     });
   }
 
-  isValidUrl(url: string): boolean {
-    const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
-
-    return urlRegex.test(url);
+  isValidUrl(url: string): string {
+    const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].\S*$/i;
+    const isValid = urlRegex.test(url);
+    return isValid ? url : 'https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png';
   }
 }

@@ -4,35 +4,39 @@
       <div class="search-container">
         <input type="text" #filterInput class="banco-input" [formControl]="search" placeholder="Search...">
       </div>
-      <button class="add-button">Add New</button>
+      <button type="button" class="main-button" routerLink="/add-product">Add New</button>
     </div>
     <div class="card-body">
       <table class="data-table">
         <thead>
         <tr>
           <th class="center-text">Logo</th>
+          <th>ID</th>
           <th>Nombre del producto</th>
           <th>Descripción</th>
           <th>Fecha de liberación</th>
           <th>Fecha de reestructuración</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let product of products">
           <td class="center-text">
-            <img class="circle-logo"
-                 [src]="isValidUrl(product.logo) ? product.logo : 'https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png'"
-                 alt="picture"/>
+            <img class="circle-logo" [src]="isValidUrl(product.logo)" alt="picture" />
           </td>
+          <td>{{product.id}}</td>
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>
-          <td>{{product.date_release | date: 'dd/mm/yyyy'}}</td>
-          <td>{{product.date_revision | date: 'dd/mm/yyyy'}}</td>
+          <td>{{product.date_release | date: 'dd/MM/yyyy'}}</td>
+          <td>{{product.date_revision | date: 'dd/MM/yyyy'}}</td>
+          <td>
+
+          </td>
         </tr>
         </tbody>
       </table>
     </div>
-    <div class="card-footer">
+    <div class="card-footer justify-content-space-between">
       <div class="results">
         <span>{{products.length}} {{products.length > 1 ? 'Resultados' : 'Resultado'}}</span>
       </div>
