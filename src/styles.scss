@@ -306,6 +306,8 @@ hr {
 /* Responsive styles */
 @media screen and (max-width: 600px) {
   .data-table th, .data-table td {
-    font-size: 14px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
