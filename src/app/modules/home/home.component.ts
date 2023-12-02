@@ -5,6 +5,7 @@ import {FinancialProducts} from "../../shared/models/productos-financieros";
 import {BancoService} from "../../core/https/banco.service";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.component";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import {RouterLink} from "@angular/router";
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    NgOptimizedImage
+    SkeletonComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -24,7 +25,6 @@ export class HomeComponent {
   products: FinancialProducts[] = [];
   productSubject = new Subject();
   isLoading = true;
-
   search = new FormControl('');
 
   @ViewChild('filterInput', {static: true}) filterInput: ElementRef | undefined;

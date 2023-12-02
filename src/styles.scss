@@ -5,8 +5,8 @@ $white: #fdfdfd;
 $gray: #ddd;
 $dark-gray: #f2f4f7;
 $invalid: #F50A0A;
-$valid: #10B21C;
-$disabled: #959595;
+$valid: #155724;
+$disabled: rgb(135 125 125 / 12%);
 
 $card-bg-color: $white;
 $card-border-radius: 10px;
@@ -62,8 +62,11 @@ body {
   margin-right: 1rem;
 }
 
+.relative{
+  position: relative;
+}
 
-.card {
+.wrapper {
   background-color: $card-bg-color;
   border-radius: $card-border-radius;
   box-shadow: $card-box-shadow;
@@ -82,12 +85,6 @@ body {
   padding: 14px 0;
 }
 
-.footer {
-  padding: 14px 0;
-  text-align: center;
-  display: flex;
-}
-
 // Common button styles
 @mixin button-styles {
   padding: 8px 12px;
@@ -104,6 +101,8 @@ body {
 
   &:disabled {
     background-color: $disabled;
+    cursor: not-allowed;
+
     &:hover {
       background-color: $gray;
     }
@@ -119,9 +118,12 @@ body {
   background-color: $dark-gray;
 
   &:disabled {
-    background-color: transparent;
+    border: 1px solid $dark-gray;
+    background-color: $disabled;
+    cursor: not-allowed;
+
     &:hover {
-      background-color: transparent;
+      background-color: $gray;
     }
   }
 
@@ -175,12 +177,12 @@ body {
   border: 1px solid $dark-gray;
   cursor: pointer;
 
-  &.active{
+  &.active {
     background: $primary;
     color: $white;
   }
 
-  &:hover{
+  &:hover {
     background: $primary;
     color: $white;
   }
@@ -246,6 +248,60 @@ hr {
     vertical-align: middle;
   }
 }
+
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+
+  &.primary {
+    color: $primary;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+  }
+
+  &.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+
+  &.danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+}
+
+.form-container {
+  display: flex;
+}
+
+.form-group {
+  label {
+    padding-top: calc(0.375rem + 1px);
+    padding-bottom: calc(0.375rem + 1px);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  margin-right: 15px;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column; /* Stack fields on small screens */
+  }
+
+  .form-group {
+    margin-right: 0;
+  }
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 600px) {

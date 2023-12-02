@@ -11,11 +11,12 @@ import {
 import {CommonModule, DatePipe} from "@angular/common";
 import {BancoService} from "../../core/https/banco.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
+import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.component";
 
 @Component({
   selector: 'app-new-product',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, SkeletonComponent],
   templateUrl: './new-product.component.html',
   styleUrl: './new-product.component.scss',
   providers: [DatePipe]
@@ -27,6 +28,7 @@ export class NewProductComponent {
   bancoService = inject(BancoService);
   datePipe = inject(DatePipe);
   productForm!: FormGroup;
+  isLoading = true;
 
   ngOnInit(): void {
     this.buildProductForm();

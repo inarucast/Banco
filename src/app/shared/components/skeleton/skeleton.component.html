@@ -1,0 +1,31 @@
+<ng-container *ngIf="type === 'table'">
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th *ngFor="let _ of [1, 2, 3, 4, 5, 6]" class="skl">
+        <div class="loader pill"></div>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+      <td *ngFor="let _ of [1, 2, 3, 4, 5, 6]" class="skl">
+        <div class="loader pill"></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-container *ngIf="type === 'form'">
+  <div class="form-container" *ngFor="let _ of [1, 2, 3]">
+    <div class="form-group" *ngFor="let _ of [1, 2]">
+      <div class="skl">
+        <div class="loader line"></div>
+      </div>
+      <div class="skl">
+        <div class="loader pill"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>

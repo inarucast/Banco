@@ -1,13 +1,15 @@
 <div class="content">
-  <div class="card">
+  <div class="wrapper">
     <h1 class="title"> {{productId ? 'Editar' : '' }} Formulario de Registro </h1>
     <hr>
     <form [formGroup]="productForm!" (ngSubmit)="onSubmit()" id="employeeForm">
+      <ng-container *ngIf="!isLoading; else showSkeleton">
         <div class="form-container">
           <div class="form-group">
             <label for="id">ID</label>
             <input #id type="text" id="id" formControlName="id" name="id" required
-                   class="banco-input validate" placeholder="ID" (blur)="onIdChange(id.value)">
+                   class="banco-input validate" placeholder="ID"
+                   (blur)="onIdChange(id.value)">
             <div class="mt-3" *ngIf="productForm?.invalid && productForm?.get('id')?.dirty">
               <div *ngIf="productForm?.get('id')?.errors?.['required']">
                 <span class="help-text ht-alert">Este campo es requerido </span>
@@ -46,7 +48,6 @@
             </div>
           </div>
         </div>
-
         <div class="form-container">
           <div class="form-group">
             <label for="description">Description</label>
@@ -77,7 +78,6 @@
             </div>
           </div>
         </div>
-
         <div class="form-container">
           <div class="form-group">
             <label for="date_release">Fecha de Liberación</label>
@@ -114,11 +114,15 @@
             </div>
           </div>
         </div>
+      </ng-container>
 
-      </form>
-    <div class="footer d-flex justify-content-center">
-      <button type="button" class="secondary-button mr-3" (click)="resetForm()" *ngIf="!productId">Reset</button>
-      <button type="submit" form="employeeForm" class="main-button" [disabled]="productForm.invalid" >Enviar</button>
+      <ng-template #showSkeleton>
+        <app-skeleton [type]="'form'"></app-skeleton>
+      </ng-template>
+    </form>
+    <div class="d-flex justify-content-center mb-3 mt-3">
+      <button type="button" class="secondary-button mr-3" (click)="resetForm()" [disabled]="productId">Reset</button>
+      <button type="submit" form="employeeForm" class="main-button" [disabled]="productForm.invalid">Enviar</button>
     </div>
   </div>
 </div>
