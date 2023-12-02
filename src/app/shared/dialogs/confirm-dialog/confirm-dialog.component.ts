@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter, inject} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FinancialProducts} from "../../models/productos-financieros";
 import {BancoService} from "../../../core/https/banco.service";
-import {catchError, finalize, throwError} from "rxjs";
+import {finalize} from "rxjs";
 import {SkeletonComponent} from "../../components/skeleton/skeleton.component";
 
 @Component({

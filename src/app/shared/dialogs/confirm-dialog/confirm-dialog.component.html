@@ -1,4 +1,4 @@
-<div class="modal">
+<div class="modal" *ngIf="product">
   <div class="content">
     <ng-container *ngIf="!isLoading; else skeleton">
       <p>Estas Seguro de eliminar el producto: <strong>{{product.name}}</strong></p>
