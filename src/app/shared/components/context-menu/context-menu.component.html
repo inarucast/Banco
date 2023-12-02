@@ -9,8 +9,15 @@
 
   <div *ngIf="show" class="menu">
     <button class="menu-item" (click)="edit()"><span> Editar </span>
-      <div class="item"></div></button>
+      <div class="item"></div>
+    </button>
     <button class="menu-item" (click)="delete()"><span> Eliminar </span>
-      <div class="item"></div></button>
+      <div class="item"></div>
+    </button>
   </div>
 </div>
+
+<app-confirm-dialog *ngIf="showDialog"
+                    [product]="product"
+                    (showDialog)="showDialog = $event">
+</app-confirm-dialog>

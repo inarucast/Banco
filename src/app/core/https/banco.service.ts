@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {FinancialProducts} from "../../shared/models/productos-financieros";
 import {environment} from "../../../environments/environment";
 
@@ -9,6 +9,7 @@ export class BancoService {
 
   private httpClient: HttpClient = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
+  public reloadTableSubject = new Subject();
 
   public getAllProducts(id: string): Observable<FinancialProducts[]> {
     return this.httpClient.get<FinancialProducts[]>(`${this.baseUrl}`, {

@@ -1,19 +1,21 @@
 import {Component, ElementRef, HostListener, inject, Input, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {BancoService} from "../../../core/https/banco.service";
 import {Router} from "@angular/router";
 import {FinancialProducts} from "../../models/productos-financieros";
+import {BancoService} from "../../../core/https/banco.service";
+import {ConfirmDialogComponent} from "../../dialogs/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-context-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ConfirmDialogComponent],
   templateUrl: './context-menu.component.html',
   styleUrl: './context-menu.component.scss'
 })
 export class ContextMenuComponent {
   @Input() product!: FinancialProducts;
   show: boolean = false;
+  showDialog: boolean = false;
 
   router = inject(Router);
   elementRef = inject(ElementRef);
@@ -30,7 +32,6 @@ export class ContextMenuComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    // Hide the menu on window resize (optional)
     this.show = false;
   }
 
@@ -50,6 +51,6 @@ export class ContextMenuComponent {
 
   delete(): void {
     this.showMenu();
-    alert('vas a eliminar');
+    this.showDialog = !this.showDialog;
   }
 }
