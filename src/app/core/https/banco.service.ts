@@ -4,7 +4,9 @@ import {Observable, Subject} from "rxjs";
 import {FinancialProducts} from "../../shared/models/productos-financieros";
 import {environment} from "../../../environments/environment";
 
-@Injectable({providedIn: 'root'})
+@Injectable({
+  providedIn: 'root',
+})
 export class BancoService {
 
   private httpClient: HttpClient = inject(HttpClient);
