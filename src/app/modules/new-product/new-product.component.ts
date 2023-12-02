@@ -8,9 +8,9 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {CommonModule, DatePipe} from "@angular/common";
+import {CommonModule, DatePipe, Location} from "@angular/common";
 import {BancoService} from "../../core/https/banco.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Params, RouterLink} from "@angular/router";
 import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.component";
 
 @Component({
@@ -24,31 +24,58 @@ import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.compo
 export class NewProductComponent {
 
   route = inject(ActivatedRoute);
-  productId = this.route.snapshot.paramMap.get('id');
+  location = inject(Location);
   bancoService = inject(BancoService);
   datePipe = inject(DatePipe);
   productForm!: FormGroup;
-  isLoading = true;
+  productData: Params | undefined
+  isLoading = false;
+
+  private getCommonValidators(minLength: number, maxLength: number): ValidatorFn[] {
+    return [Validators.required, Validators.minLength(minLength), Validators.maxLength(maxLength)];
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.productData = params;
+      if (this.productData && this.productData['id']) {
+        this.location.replaceState('/add-product/' + this.productData['id']);
+      } else {
+        this.location.replaceState('/add-product');
+      }
+    });
+
     this.buildProductForm();
   }
 
   buildProductForm(): void {
+    const {id, name, description, logo, date_release, date_revision} = this.productData || {};
+    const disabledId = !!id;
+    const releaseDate = date_release ? this.datePipe.transform(date_release, 'yyyy-MM-dd') : '';
+    const revisionDate = date_release ? this.datePipe.transform(date_revision, 'yyyy-MM-dd') : '';
+
     this.productForm = new FormGroup({
-      id: new FormControl('', {validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)]}),
-      name: new FormControl('', {validators: [Validators.required, Validators.minLength(5), Validators.maxLength(100)]}),
-      description: new FormControl('', {validators: [Validators.required, Validators.minLength(10), Validators.maxLength(200)]}),
-      logo: new FormControl('', {validators: [Validators.required]}),
-      date_release: new FormControl('', {validators: [Validators.required, this.validateDate()]}),
-      date_revision: new FormControl({value: '', disabled: true}, {validators: [Validators.required]}),
-    });
+      id: new FormControl({value: id || '', disabled: disabledId}, this.getCommonValidators(3, 10)),
+      name: new FormControl(name || '', this.getCommonValidators(5, 100)),
+      description: new FormControl(description || '', this.getCommonValidators(10, 200)),
+      logo: new FormControl(logo || '', [Validators.required]),
+      date_release: new FormControl(releaseDate, [Validators.required, this.validateDate()]),
+      date_revision: new FormControl(revisionDate, [Validators.required]),
+    }, {validators: this.validateDateOfRevision()})
 
     this.productForm.get('date_release')?.valueChanges.subscribe(dateOfRelease => {
       if (dateOfRelease) {
         this.setDateOfRevision(dateOfRelease);
       }
     });
+
+    if (this.productData && this.productData['id']) {
+      Object.values(this.productForm.controls).forEach((control: AbstractControl) => {
+        if (control.value) {
+          control.markAsDirty();
+        }
+      });
+    }
 
   }
 
@@ -86,6 +113,28 @@ export class NewProductComponent {
     };
   }
 
+  validateDateOfRevision(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const dateRelease = control.get('date_release');
+      const dateRevision = control.get('date_revision');
+
+      if (dateRelease && dateRevision) {
+        if (!dateRelease.value) {
+          return {invalidateDateOfRelease: true};
+        }
+        const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
+        const releaseDate = new Date(dateRelease.value).getTime();
+        const revisionDate = new Date(dateRevision.value).getTime();
+
+        if (revisionDate < releaseDate + oneYearInMilliseconds) {
+          return {invalidDateRevision: true};
+        }
+      }
+
+      return null;
+    }
+  }
+
   setDateOfRevision(dateOfRelease: string): void {
     const revisedDate = new Date(dateOfRelease);
     revisedDate.setFullYear(revisedDate.getFullYear() + 1);
@@ -98,14 +147,18 @@ export class NewProductComponent {
   }
 
   onSubmit(): void {
-    this.bancoService.createProduct(this.productForm.getRawValue())
-      .subscribe({
-        next: () => {
+    this.isLoading = true;
 
-        },
-        error: () => {
+    const productFormValue = this.productForm.getRawValue();
 
-        }
-      });
+    const observable = this.productData && this.productData['id']
+      ? this.bancoService.updateProduct(productFormValue)
+      : this.bancoService.createProduct(productFormValue);
+
+    observable.subscribe({
+      next: () => this.isLoading = false,
+      error: () => this.isLoading = false
+    });
   }
+
 }

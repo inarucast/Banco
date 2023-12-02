@@ -1,6 +1,6 @@
 <div class="content">
   <div class="wrapper">
-    <h1 class="title"> {{productId ? 'Editar' : '' }} Formulario de Registro </h1>
+    <h1 class="title"> {{productData && productData['id'] ? 'Editar' : '' }} Formulario de Registro </h1>
     <hr>
     <form [formGroup]="productForm!" (ngSubmit)="onSubmit()" id="employeeForm">
       <ng-container *ngIf="!isLoading; else showSkeleton">
@@ -121,7 +121,9 @@
       </ng-template>
     </form>
     <div class="d-flex justify-content-center mb-3 mt-3">
-      <button type="button" class="secondary-button mr-3" (click)="resetForm()" [disabled]="productId">Reset</button>
+      <button type="button" class="secondary-button mr-3" (click)="resetForm()"
+              [disabled]="productData && productData['id']">Reset
+      </button>
       <button type="submit" form="employeeForm" class="main-button" [disabled]="productForm.invalid">Enviar</button>
     </div>
   </div>
