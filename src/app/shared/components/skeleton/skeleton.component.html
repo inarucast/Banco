@@ -18,13 +18,15 @@
 </ng-container>
 
 <ng-container *ngIf="type === 'form'">
-  <div class="form-container" *ngFor="let _ of [1, 2, 3]">
-    <div class="form-group" *ngFor="let _ of [1, 2]">
-      <div class="skl">
-        <div class="loader line"></div>
-      </div>
-      <div class="skl">
-        <div class="loader pill"></div>
+  <div class="wrapper-form">
+    <div class="form-container-skl" *ngFor="let _ of [1, 2]">
+      <div class="form-group-skl" *ngFor="let _ of [1, 2, 3]">
+        <div class="skl">
+          <div class="loader line"></div>
+        </div>
+        <div class="skl">
+          <div class="loader pill"></div>
+        </div>
       </div>
     </div>
   </div>
