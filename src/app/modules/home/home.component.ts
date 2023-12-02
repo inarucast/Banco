@@ -6,6 +6,7 @@ import {BancoService} from "../../core/https/banco.service";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.component";
+import {ContextMenuComponent} from "../../shared/components/context-menu/context-menu.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ import {SkeletonComponent} from "../../shared/components/skeleton/skeleton.compo
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    SkeletonComponent
+    SkeletonComponent,
+    ContextMenuComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -47,10 +49,6 @@ export class HomeComponent {
         this.isLoading = false;
       }
     });
-  }
-
-  deleteProduct(productId: string): void {
-
   }
 
   isValidUrl(url: string): string {

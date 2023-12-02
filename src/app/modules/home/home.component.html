@@ -31,8 +31,7 @@
           <td>{{product.date_release | date: 'dd/MM/yyyy'}}</td>
           <td>{{product.date_revision | date: 'dd/MM/yyyy'}}</td>
           <td>
-            <button [routerLink]="'/add-product/'+product.id">Edit</button>
-            <button (click)="deleteProduct(product.id)">Delete</button>
+            <app-context-menu [product]="product"></app-context-menu>
           </td>
         </tr>
         </tbody>
