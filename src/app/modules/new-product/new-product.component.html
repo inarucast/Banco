@@ -19,11 +19,11 @@
                    Este Id ya esta en uso
                  </span>
               </div>
-              <div *ngIf="productForm?.get('id')?.errors?.['minLength']">
+              <div *ngIf="productForm?.get('id')?.errors?.['minlength']">
                   <span
                     class="help-text ht-alert">El minimo de caracteres es: 3</span>
               </div>
-              <div *ngIf="productForm?.get('id')?.errors?.['maxLength']">
+              <div *ngIf="productForm?.get('id')?.errors?.['maxlength']">
                   <span
                     class="help-text ht-alert">El maximo de caracteres es: 10</span>
               </div>
@@ -37,11 +37,11 @@
               <div *ngIf="productForm?.get('name')?.errors?.['required']">
                 <span class="help-text ht-alert">Este campo es requerido </span>
               </div>
-              <div *ngIf="productForm?.get('name')?.errors?.['minLength']">
+              <div *ngIf="productForm?.get('name')?.errors?.['minlength']">
                   <span
                     class="help-text ht-alert">El minimo de caracteres es: 5</span>
               </div>
-              <div *ngIf="productForm?.get('name')?.errors?.['maxLength']">
+              <div *ngIf="productForm?.get('name')?.errors?.['maxlength']">
                   <span
                     class="help-text ht-alert">El maximo de caracteres es: 100</span>
               </div>
@@ -57,11 +57,11 @@
               <div *ngIf="productForm?.get('description')?.errors?.['required']">
                 <span class="help-text ht-alert">Este campo es requerido </span>
               </div>
-              <div *ngIf="productForm?.get('description')?.errors?.['minLength']">
+              <div *ngIf="productForm?.get('description')?.errors?.['minlength']">
                   <span
                     class="help-text ht-alert">El minimo de caracteres es: 10</span>
               </div>
-              <div *ngIf="productForm?.get('description')?.errors?.['maxLength']">
+              <div *ngIf="productForm?.get('description')?.errors?.['maxlength']">
                   <span
                     class="help-text ht-alert">El maximo de caracteres es: 200</span>
               </div>
