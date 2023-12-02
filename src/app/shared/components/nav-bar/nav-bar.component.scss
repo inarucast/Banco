@@ -1,22 +1,22 @@
+$navbar-bg-color: #fdfdfd;
+
 .navbar {
-  background-color: #fdfdfd;
-  color: #2d3c69;
+  background-color: $navbar-bg-color;
   text-align: center;
-}
 
-.navbar-logo img {
-  width: 160px;
-  height: auto;
-}
+  &-logo {
+    img {
+      width: 160px;
+      height: auto;
 
-
-@media screen and (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+      @media screen and (max-width: 600px) {
+        width: 100px;
+      }
+    }
   }
 
-  .navbar-logo img {
-    width: 100px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
