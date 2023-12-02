@@ -16,6 +16,9 @@ $card-margin-bottom: 20px;
 $banco-input-border-radius: 0.25rem;
 $banco-input-transition-duration: 0.15s;
 
+$main-focus: rgba(255, 221, 0, 0.72);
+$secondary-focus: #e5e9f3;
+
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -100,8 +103,14 @@ body {
   background-color: $secondary;
 
   &:disabled {
-    color: $dark-gray;
     background-color: $disabled;
+    &:hover {
+      background-color: $gray;
+    }
+  }
+
+  &:hover {
+    background-color: $main-focus;
   }
 }
 
@@ -110,8 +119,14 @@ body {
   background-color: $dark-gray;
 
   &:disabled {
-    color: $dark-gray;
     background-color: transparent;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    background-color: $secondary-focus;
   }
 }
 
@@ -152,12 +167,23 @@ body {
 }
 
 .custom-box a, select {
-  color: #0f265c;
+  color: $primary;
   line-height: 1.5;
   padding: 0.375rem 0.75rem;
   text-decoration: none;
   background-clip: padding-box;
   border: 1px solid $dark-gray;
+  cursor: pointer;
+
+  &.active{
+    background: $primary;
+    color: $white;
+  }
+
+  &:hover{
+    background: $primary;
+    color: $white;
+  }
 }
 
 .banco-input {
@@ -178,7 +204,7 @@ body {
   box-sizing: border-box;
 
   &:focus {
-    box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+    box-shadow: 0 1px 2px rgb(185, 211, 248);
     color: $primary;
     border-color: rgb(27, 45, 83);
     outline: none;
