@@ -31,3 +31,13 @@
     </div>
   </div>
 </ng-container>
+
+<ng-container *ngIf="type === 'text'">
+  <div class="skl" *ngFor="let _ of [1, 2]">
+    <div class="loader text"></div>
+  </div>
+  <div class="skl d-flex">
+    <div class="loader button mr-3"></div>
+    <div class="loader button"></div>
+  </div>
+</ng-container>
