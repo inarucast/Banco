@@ -1,8 +1,14 @@
-<dialog open>
-  <p>Estas Seguro de eliminar el producto: </p>
-
-  <div class="footer d-flex justify-content-center">
-    <button type="button" class="secondary-button mr-3">Cancelar</button>
-    <button type="submit">Confirmar</button>
+<div class="modal">
+  <div class="content">
+    <ng-container *ngIf="!isLoading; else skeleton">
+      <p>Estas Seguro de eliminar el producto: <strong>{{product.name}}</strong></p>
+      <div class="d-flex justify-content-center">
+        <button class="secondary-button mr-3" (click)="cancelDelete()">Cancelar</button>
+        <button class="main-button" (click)="confirmDelete()">Confirmar</button>
+      </div>
+    </ng-container>
+    <ng-template #skeleton>
+      <app-skeleton [type]="'text'"></app-skeleton>
+    </ng-template>
   </div>
-</dialog>
+</div>
