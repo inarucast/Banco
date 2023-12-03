@@ -59,6 +59,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.mr-1 {
+  margin-right: 0.5rem;
+}
+
+
 .mr-3 {
   margin-right: 1rem;
 }
@@ -78,7 +83,6 @@ body {
   display: flex;
   flex-direction: column;
   padding: $card-padding;
-  overflow: hidden;
   margin-bottom: $card-margin-bottom;
 }
 
@@ -122,7 +126,12 @@ body {
   @include button-styles;
   background-color: $dark-gray;
 
-  &.transparent{
+  &.active{
+    background-color: $primary;
+    color: $white;
+  }
+
+  &.transparent {
     background-color: transparent;
   }
 
@@ -177,7 +186,7 @@ body {
   border-radius: 50%;
 }
 
-.custom-box a, select {
+.custom-box {
   color: $primary;
   line-height: 1.5;
   padding: 0.375rem 0.75rem;
@@ -187,11 +196,6 @@ body {
   cursor: pointer;
 
   &.active {
-    background: $primary;
-    color: $white;
-  }
-
-  &:hover {
     background: $primary;
     color: $white;
   }
