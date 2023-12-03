@@ -1,6 +1,6 @@
-<div class="modal" *ngIf="product">
+<div class="modal">
   <div class="content">
-    <ng-container *ngIf="!isLoading; else skeleton">
+    <ng-container *ngIf="!isLoading && product; else skeleton">
       <p>Estas Seguro de eliminar el producto: <strong>{{product.name}}</strong></p>
       <div class="d-flex justify-content-center">
         <button class="secondary-button mr-3" (click)="cancelDelete()">Cancelar</button>
