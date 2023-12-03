@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of totalItems">
           <td class="center-text">
             <img class="circle-logo" [src]="isValidUrl(product.logo)" alt="picture"/>
           </td>
@@ -43,25 +43,26 @@
 
     <div class="d-flex justify-content-space-between mb-3 mt-3">
       <div class="results">
-        <span>{{products.length}} {{products.length > 1 ? 'Resultados' : 'Resultado'}}</span>
+        <span>{{totalItems.length}} {{totalItems.length > 1 ? 'Resultados' : 'Resultado'}}
+          de {{products.length}}</span>
       </div>
       <div class="d-flex align-items-center">
         <div class="mr-3">
-          <select class="custom-box">
-            <option>5</option>
-            <option>10</option>
-            <option>20</option>
+          <select class="custom-box" (change)="updatePageSize($event.target)">
+            <option [value]="5">5</option>
+            <option [value]="10">10</option>
+            <option [value]="20">20</option>
           </select>
         </div>
-        <div class="custom-box">
-          <a href="#">&laquo;</a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">&raquo;</a>
+        <div class="paginator">
+          <button type="button" class="secondary-button mr-1" (click)="previousPage()" [disabled]="currentPage === 1">
+            &laquo;
+          </button>
+          <button type="button" class="secondary-button mr-1" *ngFor="let page of totalPages; let i = index"
+                  (click)="goToPage(page)" [class.active]="currentPage === page">{{page}}</button>
+          <button type="button" class="secondary-button" (click)="nextPage()"
+                  [disabled]="currentPage === totalPages.length">&raquo;
+          </button>
         </div>
       </div>
     </div>
