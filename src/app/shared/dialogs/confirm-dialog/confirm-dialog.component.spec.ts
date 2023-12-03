@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 import {HttpClientModule} from "@angular/common/http";
-import {BancoService} from "../../../core/https/banco.service";
 
 describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
@@ -11,7 +10,6 @@ describe('ConfirmDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ConfirmDialogComponent, HttpClientModule],
-      providers: [BancoService]
     })
     .compileComponents();
 

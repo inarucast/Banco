@@ -31,7 +31,7 @@ export class NewProductComponent {
   productData: Params | undefined
   isLoading = false;
 
-  private getCommonValidators(minLength: number, maxLength: number): ValidatorFn[] {
+  public getCommonValidators(minLength: number, maxLength: number): ValidatorFn[] {
     return [Validators.required, Validators.minLength(minLength), Validators.maxLength(maxLength)];
   }
 

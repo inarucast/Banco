@@ -24,4 +24,15 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should update page size and load pages', () => {
+    const event = { value: 10 };
+    spyOn(component, 'loadPages');
+
+    component.updatePageSize(event);
+
+    expect(component.pageSize).toEqual(10);
+    expect(component.loadPages).toHaveBeenCalled();
+  });
+
 });
